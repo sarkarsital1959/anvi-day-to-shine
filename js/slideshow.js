@@ -11,84 +11,94 @@
     if (!overlay) return;
     overlay.style.display = 'flex';
 
-    // Shuffle photos
+    // Shuffle
     for (var i = photos.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var tmp = photos[i]; photos[i] = photos[j]; photos[j] = tmp;
     }
 
-    // Tile placement positions — scattered but balanced
     var isMobile = window.innerWidth < 768;
-    var tileSize = isMobile ? 110 : 160;
+    var tileW = isMobile ? 140 : 200;
+    var tileH = isMobile ? 180 : 250;
     var tiles = [];
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
 
-    function randomPos() {
-        return {
-            x: Math.random() * (window.innerWidth - tileSize - 20) + 10,
-            y: Math.random() * (window.innerHeight - tileSize - 20) + 10
+    // Preload all images first, then start animation
+    var loaded = 0;
+    var imgElements = [];
+
+    photos.forEach(function (src, i) {
+        var img = new Image();
+        img.onload = img.onerror = function () {
+            loaded++;
+            if (loaded === photos.length) startAnimation();
         };
+        img.src = src;
+        imgElements.push(img);
+    });
+
+    function startAnimation() {
+        photos.forEach(function (src, i) {
+            var tile = document.createElement('div');
+            tile.className = 'glass-tile';
+            var rot = (Math.random() * 14 - 7);
+            tile.style.setProperty('--rot', rot + 'deg');
+            tile.style.width = tileW + 'px';
+            tile.style.height = tileH + 'px';
+
+            // Spread across screen avoiding dead center
+            var x = Math.random() * (vw - tileW - 40) + 20;
+            var y = Math.random() * (vh - tileH - 40) + 20;
+            tile.style.left = x + 'px';
+            tile.style.top = y + 'px';
+
+            var img = document.createElement('img');
+            img.src = src;
+            img.alt = '';
+            tile.appendChild(img);
+            overlay.appendChild(tile);
+            tiles.push(tile);
+        });
+
+        // Pop in one by one
+        var popDelay = 200;
+        tiles.forEach(function (tile, i) {
+            setTimeout(function () {
+                tile.classList.add('pop-in');
+            }, i * popDelay);
+        });
+
+        // Show message after tiles
+        var allInTime = tiles.length * popDelay + 400;
+        setTimeout(function () {
+            if (message) message.classList.add('visible');
+        }, allInTime);
+
+        // Auto-end after holding
+        autoTimer = setTimeout(endSlideshow, allInTime + 2000);
     }
 
-    // Create tiles (hidden initially)
-    photos.forEach(function (src, i) {
-        var tile = document.createElement('div');
-        tile.className = 'glass-tile';
-        var rot = (Math.random() * 16 - 8);
-        tile.style.setProperty('--rot', rot + 'deg');
-        tile.style.width = tileSize + 'px';
-        tile.style.height = tileSize + 'px';
-
-        var pos = randomPos();
-        tile.style.left = pos.x + 'px';
-        tile.style.top = pos.y + 'px';
-
-        var img = document.createElement('img');
-        img.src = src;
-        img.alt = '';
-        tile.appendChild(img);
-        overlay.appendChild(tile);
-        tiles.push(tile);
-    });
-
-    // Stagger pop-in: each tile pops in 150ms apart
-    var popDelay = 150;
-    tiles.forEach(function (tile, i) {
-        setTimeout(function () {
-            tile.classList.add('pop-in');
-        }, i * popDelay);
-    });
-
-    // Show message after all tiles are in
-    var allInTime = tiles.length * popDelay + 300;
-    setTimeout(function () {
-        if (message) message.classList.add('visible');
-    }, allInTime);
-
-    // After a beat, fly everything out
-    var holdTime = 1500;
-    var flyOutStart = allInTime + holdTime;
+    var autoTimer;
 
     function endSlideshow() {
-        // Fly out tiles
         tiles.forEach(function (tile, i) {
             setTimeout(function () {
                 tile.classList.remove('pop-in');
                 tile.classList.add('fly-out');
-            }, i * 60);
+            }, i * 50);
         });
-        // Fade message
-        if (message) message.style.opacity = '0';
-        // Fade overlay
+        if (message) {
+            message.style.transition = 'opacity 0.4s ease';
+            message.style.opacity = '0';
+        }
         setTimeout(function () {
             overlay.classList.add('fade-out');
             setTimeout(function () { overlay.remove(); }, 600);
-        }, tiles.length * 60 + 400);
+        }, tiles.length * 50 + 300);
     }
 
-    // Auto-end
-    var autoTimer = setTimeout(endSlideshow, flyOutStart);
-
-    // Skip button
+    // Skip
     var skipBtn = overlay.querySelector('.slideshow-skip');
     if (skipBtn) {
         skipBtn.addEventListener('click', function () {
