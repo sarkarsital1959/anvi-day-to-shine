@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>✨ It's Anvi's Day to Shine ✨</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
-    
+    <title>It's Anvi's Day to Shine</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x2728;</text></svg>">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Pacifico&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+
     <!-- External Styles -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/slideshow.css">
@@ -24,445 +24,89 @@
             <p>Happy Birthday, Anvi</p>
         </div>
     </div>
-    <!-- Photo Mosaic Background -->
-    <div class="photo-mosaic">
-        <img src="images/IMG_1229.jpg" alt="">
-        <img src="images/IMG_1283.jpg" alt="">
-        <img src="images/IMG_1611.jpg" alt="">
-        <img src="images/IMG_1719.jpg" alt="">
-        <img src="images/IMG_1775.jpg" alt="">
-        <img src="images/IMG_1866.jpg" alt="">
-        <img src="images/IMG_1927.jpg" alt="">
-        <img src="images/IMG_2090.jpg" alt="">
-        <img src="images/IMG_2103.jpg" alt="">
-        <img src="images/IMG_2157.jpg" alt="">
-        <img src="images/IMG_2217.jpg" alt="">
-    </div>
 
-    <!-- Submission Modal -->
-    <div class="submission-modal" id="submissionModal">
-        <div class="submission-content">
-            <span class="submission-close" onclick="closeSubmissionModal()">&times;</span>
-            <div class="submission-header">
-                <h2 id="submissionTitle">🔒 Challenge Completed!</h2>
-                <p id="submissionSubtitle">Here are your team's submissions</p>
-            </div>
-            <div class="submission-body" id="submissionBody">
-                <!-- Content will be populated dynamically -->
-            </div>
-        </div>
-    </div>
-    
     <div class="container">
-        <!-- Returning User Confirmation Screen -->
-        <div class="login-screen hidden" id="confirmScreen">
-            <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
-            <p class="login-subtitle">Happy Birthday, Anvi!</p>
-            <h2 style="text-align: center; color: #a78bfa; margin: 20px 0;">Welcome Back!</h2>
-            <div class="login-form">
-                <div class="form-group">
-                    <label>Are you sure you are:</label>
-                    <p id="confirmPlayerName" style="font-size: 24px; font-weight: bold; color: #a78bfa; padding: 15px; background: #f0f0f0; border-radius: 8px; text-align: center; margin: 15px 0;"></p>
-                </div>
-                <div class="form-group">
-                    <label>Your Team:</label>
-                    <p id="confirmTeamName" style="font-size: 20px; font-weight: bold; color: #6ee7b7; padding: 12px; background: #f0f0f0; border-radius: 8px; text-align: center;"></p>
-                </div>
-                <button type="button" class="login-btn" onclick="confirmIdentity()" style="background: #6ee7b7;">✓ Yes, Continue</button>
-                <button type="button" class="login-btn" onclick="startFresh()" style="background: #fca5a5; margin-top: 15px;">✗ No, Start Fresh</button>
+        <!-- Header -->
+        <header class="page-header">
+            <h1 class="page-title"><em>It's Anvi's Day to Shine</em></h1>
+            <p class="page-subtitle">Happy Birthday, Anvi!</p>
+        </header>
+
+        <!-- Photo Collage -->
+        <div class="photo-collage" id="photoCollage">
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2103.jpg" alt=""></div>
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1611.jpg" alt=""></div>
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1283.jpg" alt=""></div>
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1866.jpg" alt=""></div>
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1927.jpg" alt=""></div>
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2090.jpg" alt=""></div>
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1775.jpg" alt=""></div>
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2217.jpg" alt=""></div>
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2157.jpg" alt=""></div>
+            <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1719.jpg" alt=""></div>
+        </div>
+        <div class="photo-backdrop" id="photoBackdrop" onclick="collapsePhoto()"></div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Game 1 -->
+        <div class="game-card">
+            <h2>Two Truths & Two Lies</h2>
+            <ul class="rules">
+                <li>Each team (4 players) comes forward together</li>
+                <li>Each player says one statement &mdash; team decides which 2 are truths, which 2 are lies</li>
+                <li>Other 4 teams discuss and guess which 2 are lies</li>
+                <li>Every team gets a turn. Performing team doesn't score that round.</li>
+            </ul>
+            <div class="scoring">
+                <span class="scoring-item">Both correct <strong>20 pts</strong></span>
+                <span class="scoring-item">One correct <strong>10 pts</strong></span>
+                <span class="scoring-item">Both wrong <strong>0 pts</strong></span>
             </div>
         </div>
 
-        <!-- Step 1: Name Selection Screen -->
-        <div class="login-screen hidden" id="nameScreen">
-            <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
-            <p class="login-subtitle">Happy Birthday, Anvi!</p>
+        <!-- Divider -->
+        <div class="divider"></div>
 
-            <!-- Photo Collage — tap to expand -->
-            <div class="photo-collage" id="photoCollage">
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2103.jpg" alt=""></div>
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1611.jpg" alt=""></div>
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1283.jpg" alt=""></div>
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1866.jpg" alt=""></div>
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1927.jpg" alt=""></div>
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2090.jpg" alt=""></div>
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1775.jpg" alt=""></div>
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2217.jpg" alt=""></div>
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2157.jpg" alt=""></div>
-                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1719.jpg" alt=""></div>
-            </div>
-            <div class="photo-backdrop" id="photoBackdrop" onclick="collapsePhoto()"></div>
-
-            <div class="login-form">
-                <div class="form-group">
-                    <label for="playerName">Select Your Name</label>
-                    <div style="position: relative;">
-                        <input type="text" 
-                               id="playerName" 
-                               placeholder="Type to search or click to see all..."
-                               autocomplete="off"
-                               required
-                               style="width: 100%; padding: 12px; border: 2px solid #a78bfa; border-radius: 10px; background: white; color: #333; font-size: 16px; font-weight: 500;">
-                        <div id="nameDropdown" 
-                             style="display: none; position: absolute; top: 100%; left: 0; right: 0; max-height: 300px; overflow-y: auto; background: rgba(50, 50, 70, 0.95); border: 2px solid rgba(255,255,255,0.3); border-radius: 10px; margin-top: 5px; backdrop-filter: blur(10px); z-index: 1000;">
-                </div>
-                    </div>
-                    <input type="hidden" id="playerNameValidated" value="">
-                </div>
-                <button type="button" class="login-btn" onclick="proceedToPassword()">Continue</button>
-                <p class="error-message" id="nameError">Please enter your name!</p>
-            </div>
-            <div class="info-box">
-                <h3>🎮 Multiplayer Features:</h3>
-                <p>• Real-time collaboration with your team<br>
-                • Shared timer across all players<br>
-                • See your teammates' progress live<br>
-                • Work together to win the challenge!</p>
+        <!-- Game 2 -->
+        <div class="game-card">
+            <h2>Paper Telephone</h2>
+            <ul class="rules">
+                <li>Each team plays within themselves (4 players, simultaneous)</li>
+                <li>Pick a prompt card, fill in the blanks &rarr; pass &rarr; draw it (30 sec) &rarr; pass &rarr; guess &rarr; pass &rarr; draw</li>
+                <li>Chain loops back. Read the full chain aloud.</li>
+                <li>3 rounds: <em>Warming Up</em> &rarr; <em>Getting Spicy</em> &rarr; <em>No Turning Back</em></li>
+                <li>Everyone votes on the best / funniest combo</li>
+            </ul>
+            <div class="scoring">
+                <span class="scoring-item">Best combo <strong>20 pts</strong></span>
+                <span class="scoring-item">Runner up <strong>10 pts</strong></span>
             </div>
         </div>
 
-        <!-- Step 2: Team Assignment Screen -->
-        <div class="login-screen hidden" id="teamScreen">
-            <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
-            <p class="login-subtitle">Happy Birthday, Anvi!</p>
-            <div class="login-form">
-                <div class="form-group">
-                    <label for="displayNameLabel2">Player Name</label>
-                    <p id="displayNameLabel2" style="font-size: 20px; font-weight: bold; color: #a78bfa; padding: 10px; background: #f0f0f0; border-radius: 8px; text-align: center;"></p>
-                </div>
-                <div class="form-group">
-                    <label for="displayTeamLabel2">Your Team</label>
-                    <p id="displayTeamLabel2" style="font-size: 18px; font-weight: bold; color: #6ee7b7; padding: 10px; background: #f0f0f0; border-radius: 8px; text-align: center;"></p>
-                </div>
-                <div class="form-group">
-                    <label style="display: flex; align-items: center; gap: 8px;">
-                        👥 Current Team Members
-                        <span class="info-tooltip">
-                            ℹ️
-                            <span class="info-tooltip-text">
-                                Teams are assigned using a consistent algorithm based on your name. Same name = Same team every time! ✨
-                            </span>
-                        </span>
-                    </label>
-                    <div id="teamMembersList" style="padding: 15px; background: #f8f9fa; border-radius: 8px; min-height: 50px;">
-                        <p style="color: #999; text-align: center; font-size: 14px;">Loading team members...</p>
-                    </div>
-                </div>
-                <button type="button" class="login-btn" onclick="proceedToChallenges()">Continue</button>
-                <button type="button" class="login-btn" onclick="leaveTeamFromAssignment()" style="background: #fca5a5; width: 100%; margin-top: 15px;">Leave Team</button>
-            </div>
-        </div>
+        <!-- Divider -->
+        <div class="divider"></div>
 
-        <!-- Step 3: Challenges Selection Screen -->
-        <div class="login-screen hidden" id="challengesScreen">
-            <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
-            <p class="login-subtitle">Happy Birthday, Anvi!</p>
-            <!-- Partiful Event Link -->
-            <div style="text-align: center; margin: 15px 0;">
-                <a href="https://partiful.com/e/cIr9wLWguc4iEw3yBb8I" target="_blank" style="display: inline-block; padding: 10px 24px; background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 15px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    🎉 View Event on Partiful
-                </a>
-            </div>
-
-            <!-- Games Grid -->
-            <div class="challenges-grid">
-                <div class="challenge-card" id="game1Card" data-challenge="1">
-                    Game 1<br>🔒
-                </div>
-                <div class="challenge-card" id="game2Card" data-challenge="2">
-                    Game 2<br>🔒
-                </div>
-            </div>
-            
-            <button type="button" class="login-btn" onclick="backToTeamFromChallenges()" style="background: #999; margin-top: 25px;">← Back</button>
-        </div>
-
-        <!-- Step 4: Password Screen -->
-        <div class="login-screen hidden" id="passwordScreen">
-            <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
-            <p class="login-subtitle">Happy Birthday, Anvi!</p>
-            <h2 style="text-align: center; color: #a78bfa; margin: 20px 0;">Game 2</h2>
-            
-            <!-- House Layout Preview -->
-            <div style="max-width: 600px; margin: 20px auto; padding: 0 15px;">
-                <h3 style="text-align: center; color: #a78bfa; margin-bottom: 15px;">🏠 House Layout Preview</h3>
-                <div class="floorplan-container" style="pointer-events: none; opacity: 0.9;">
-                    <div class="floorplan">
-                        <div class="room backroom" data-room="backroom">
-                            <span>Backroom</span>
-                        </div>
-                        <div class="room family-room" data-room="family-room">
-                            <span>Family Room</span>
-                        </div>
-                        <div class="room kitchen" data-room="kitchen">
-                            <span>Kitchen</span>
-                        </div>
-                        <div class="room laundry" data-room="laundry">
-                            <span>Laundry</span>
-                        </div>
-                        <div class="room bathroom" data-room="bathroom">
-                            <span>Bathroom</span>
-                        </div>
-                        <div class="room office" data-room="office">
-                            <span>Office</span>
-                        </div>
-                        <div class="room stairs" data-room="stairs">
-                            <span>Stairs</span>
-                        </div>
-                        <div class="room dining-room" data-room="dining-room">
-                            <span>Dining Room</span>
-                        </div>
-                        <div class="room living-room" data-room="living-room">
-                            <span>Living room</span>
-                        </div>
-                    </div>
-                </div>
-                <p style="text-align: center; color: #999; font-size: 14px; margin-top: 10px;">
-                    Count items at different locations in each room!
-                </p>
-            </div>
-            
-            <!-- Practice Room Example -->
-            <div style="max-width: 500px; margin: 30px auto; padding: 20px; background: rgba(255, 255, 255, 0.95); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <h3 style="text-align: center; color: #a78bfa; margin-bottom: 10px;">🎯 Try It Out!</h3>
-                <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">
-                    Click a circle to start counting, then use +/− buttons to adjust
-                </p>
-                <div class="markers-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 350px; margin: 0 auto; gap: 15px;">
-                    <div class="marker-point" id="practice1" onclick="adjustPracticeCount(1, 1)">
-                        <div class="marker-main-number">•</div>
-                    </div>
-                    <div class="marker-point" id="practice2" onclick="adjustPracticeCount(2, 1)">
-                        <div class="marker-main-number">•</div>
-                    </div>
-                    <div class="marker-point" id="practice3" onclick="adjustPracticeCount(3, 1)">
-                        <div class="marker-main-number">•</div>
-                    </div>
-                    <div class="marker-point" id="practice4" onclick="adjustPracticeCount(4, 1)">
-                        <div class="marker-main-number">•</div>
-                    </div>
-                    <div class="marker-point" id="practice5" onclick="adjustPracticeCount(5, 1)">
-                        <div class="marker-main-number">•</div>
-                    </div>
-                    <div class="marker-point" id="practice6" onclick="adjustPracticeCount(6, 1)">
-                        <div class="marker-main-number">•</div>
-                    </div>
-                    <div class="marker-point" id="practice7" onclick="adjustPracticeCount(7, 1)">
-                        <div class="marker-main-number">•</div>
-                    </div>
-                    <div class="marker-point" id="practice8" onclick="adjustPracticeCount(8, 1)">
-                        <div class="marker-main-number">•</div>
-                    </div>
-                    <div class="marker-point" id="practice9" onclick="adjustPracticeCount(9, 1)">
-                        <div class="marker-main-number">•</div>
-                    </div>
-                </div>
-                <div style="text-align: center; margin-top: 15px;">
-                    <button type="button" onclick="resetPracticeRoom()" onmouseover="this.style.background='#777'" onmouseout="this.style.background='#999'" style="padding: 8px 20px; background: #999; color: white; border: none; border-radius: 8px; font-size: 13px; cursor: pointer; transition: all 0.3s ease; -webkit-tap-highlight-color: transparent;">
-                        🔄 Reset Practice
-                    </button>
-                </div>
-                <p style="text-align: center; color: #999; font-size: 12px; margin-top: 10px; font-style: italic;">
-                    💡 This is just a preview - your real progress will be saved in the game!
-                </p>
-            </div>
-            
-            <div class="login-form">
-                <div class="form-group">
-                    <label for="password">Enter Password to Start</label>
-                    <input type="password" id="password" placeholder="Enter game password" required>
-                </div>
-                <button type="button" class="login-btn" onclick="startGameLogin()">Start Game</button>
-                <p class="error-message" id="passwordError">Incorrect password! Try again.</p>
-                <button type="button" class="login-btn" onclick="backToChallengesFromPassword()" style="background: #999; margin-top: 15px;">← Back</button>
-            </div>
-        </div>
-
-        <!-- Challenge 1: Password Screen -->
-        <div class="login-screen hidden" id="challenge1PasswordScreen">
-            <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
-            <p class="login-subtitle">Happy Birthday, Anvi!</p>
-            <h2 style="text-align: center; color: #a78bfa; margin: 20px 0;">Game 1 - Memory Game</h2>
-
-            <div style="max-width: 500px; margin: 20px auto; padding: 20px; background: rgba(255, 255, 255, 0.95); border-radius: 15px;">
-                <h3 style="text-align: center; color: #a78bfa; margin-bottom: 15px;">📝 How It Works</h3>
-                <p style="color: #666; line-height: 1.6; margin-bottom: 10px;">
-                    Add up to 25 memory items (just type and press Enter)
-                </p>
-            </div>
-            
-            <div class="login-form">
-                <div class="form-group">
-                    <label for="challenge1Password">Enter Password to Start</label>
-                    <input type="password" id="challenge1Password" placeholder="Enter game password" required>
-                </div>
-                <button type="button" class="login-btn" onclick="startChallenge1()">Start Challenge</button>
-                <p class="error-message" id="challenge1PasswordError">Incorrect password! Try again.</p>
-                <button type="button" class="login-btn" onclick="backToChallengesFromChallenge1Password()" style="background: #999; margin-top: 15px;">← Back</button>
-            </div>
-        </div>
-
-        <!-- Game 1: Memory Items Screen -->
-        <div class="game-screen hidden" id="game1Screen">
-            <h1>✨ It's Anvi's Day to Shine ✨ - Game 1</h1>
-            <p style="text-align: center; color: #999; font-size: 16px; margin-bottom: 10px;">Happy Birthday, Anvi!</p>
-            <div class="team-name" id="game1TeamName"></div>
-            <div class="player-info" id="game1PlayerName"></div>
-            <h2 style="text-align: center; color: #a78bfa; margin: 10px 0;">Game 1: Memory Items</h2>
-            
-            <!-- Point System Info -->
-            <div style="max-width: 600px; margin: 15px auto; padding: 15px; background: linear-gradient(135deg, #a78bfa15 0%, #c4b5fd15 100%); border: 2px solid #a78bfa; border-radius: 12px; text-align: center;">
-                <p style="margin: 0; font-size: 14px; color: #a78bfa; font-weight: 600;">
-                    🏆 Point System: 1st Place = 50 points | Last Place = 0 points
-                </p>
-            </div>
-            
-            <div class="timer" id="game1Timer" style="font-size: 48px; font-weight: bold; text-align: center; color: #a78bfa; margin: 20px 0;">1:00</div>
-            
-            <div style="max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 style="color: #a78bfa;">Items Added: <span id="game1Count">0</span> / 25</h3>
-                    <button onclick="backToGame1Selection()" style="padding: 10px 20px; background: #999; color: white; border: none; border-radius: 8px; cursor: pointer;">← Back</button>
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <input type="text" id="game1Input" placeholder="Type an item and press Enter..." style="width: 100%; padding: 15px; border: 2px solid #a78bfa; border-radius: 10px; font-size: 16px;" onkeypress="if(event.key==='Enter') addGame1Item()">
-                    <button onclick="addGame1Item()" style="width: 100%; margin-top: 10px; padding: 12px; background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer;">
-                        ➕ Add Item
-                    </button>
-                </div>
-                
-                <div id="game1Items" style="display: flex; flex-wrap: wrap; gap: 10px; min-height: 100px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-                    <p style="color: #999; margin: auto;">No items yet. Start typing!</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Game 2: Spot Finder Screen -->
-        <div class="game-screen" id="gameScreen">
-            <div class="connection-status disconnected" id="connectionStatus">
-                🔴 Connecting to server...
-            </div>
-            
-            <h1>✨ It's Anvi's Day to Shine ✨</h1>
-            <p style="text-align: center; color: #999; font-size: 16px; margin-bottom: 10px;">Happy Birthday, Anvi!</p>
-            <div class="team-name" id="displayTeamName"></div>
-            <div class="player-info" id="displayPlayerName"></div>
-            <div class="active-players" id="activePlayers">👥 Active Players: 1</div>
-            <h2 style="text-align: center; color: #a78bfa; margin: 10px 0;">Game 2: The Ultimate Spot Finder</h2>
-            
-            <!-- Point System Info -->
-            <div style="max-width: 600px; margin: 15px auto; padding: 15px; background: linear-gradient(135deg, #a78bfa15 0%, #c4b5fd15 100%); border: 2px solid #a78bfa; border-radius: 12px; text-align: center;">
-                <p style="margin: 0; font-size: 14px; color: #7c3aed; font-weight: 600;">
-                    🎯 Point System: Correct Find = +5 pts | False Find = -5 pts | 81 Total Locations
-                </p>
-            </div>
-            
-            <p class="subtitle">Click on any room to count items at each location!</p>
-            
-            <div class="timer" id="timer">1:00</div>
-            <div class="game-over" id="gameOver">🎉 Game Complete!</div>
-            
-            <div class="floorplan-container">
-                <div class="floorplan">
-                    <div class="room backroom" data-room="backroom" onclick="openRoom('backroom')">
-                        <span>Backroom</span>
-                        <span class="room-progress" id="progress-backroom">0/9</span>
-                    </div>
-                    <div class="room family-room" data-room="family-room" onclick="openRoom('family-room')">
-                        <span>Family Room</span>
-                        <span class="room-progress" id="progress-family-room">0/9</span>
-                    </div>
-                    <div class="room kitchen" data-room="kitchen" onclick="openRoom('kitchen')">
-                        <span>Kitchen</span>
-                        <span class="room-progress" id="progress-kitchen">0/9</span>
-                    </div>
-                    <div class="room laundry" data-room="laundry" onclick="openRoom('laundry')">
-                        <span>Laundry</span>
-                        <span class="room-progress" id="progress-laundry">0/9</span>
-                    </div>
-                    <div class="room bathroom" data-room="bathroom" onclick="openRoom('bathroom')">
-                        <span>Bathroom</span>
-                        <span class="room-progress" id="progress-bathroom">0/9</span>
-                    </div>
-                    <div class="room office" data-room="office" onclick="openRoom('office')">
-                        <span>Office</span>
-                        <span class="room-progress" id="progress-office">0/9</span>
-                    </div>
-                    <div class="room stairs" data-room="stairs" onclick="openRoom('stairs')">
-                        <span>Stairs</span>
-                        <span class="room-progress" id="progress-stairs">0/9</span>
-                    </div>
-                    <div class="room dining-room" data-room="dining-room" onclick="openRoom('dining-room')">
-                        <span>Dining Room</span>
-                        <span class="room-progress" id="progress-dining-room">0/9</span>
-                    </div>
-                    <div class="room living-room" data-room="living-room" onclick="openRoom('living-room')">
-                        <span>Living room</span>
-                        <span class="room-progress" id="progress-living-room">0/9</span>
-                    </div>
-                </div>
-            </div>
-            
-            <p class="instruction">💡 Click any room to count items • Use +/− buttons to adjust counts • Timer starts automatically! • All team members see changes in real-time!</p>
-            
-            <div class="stats">
-                Total Points Counted: <strong><span id="totalCount">0</span>/81</strong> locations
-            </div>
-            
-            <div class="controls">
-                <button class="reset-btn" onclick="backToChallengesFromGame()" style="background: #999;">← Back to Challenges</button>
-            </div>
+        <!-- Partiful CTA -->
+        <div class="cta-section">
+            <a href="https://partiful.com/e/cIr9wLWguc4iEw3yBb8I" target="_blank" class="cta-link">
+                View Event on Partiful
+            </a>
         </div>
     </div>
 
-    <!-- Surprise Message -->
-    <div class="surprise-overlay" id="surpriseOverlay"></div>
-    <div class="surprise-message" id="surpriseMessage">
-        🎉 PLOT TWIST! 🎉<br>
-        You get 30 MORE SECONDS!<br>
-        It's not over yet! 😄
-    </div>
-
-    <!-- Room Detail Modal -->
-    <div class="room-modal" id="roomModal">
-        <div class="room-detail">
-            <div class="room-detail-header">
-                <h2 class="room-detail-title" id="modalRoomTitle"></h2>
-                <button class="close-btn" onclick="closeRoom()">Close</button>
-            </div>
-            <div class="markers-grid" id="markersGrid"></div>
-            <div class="room-stats">
-                Points counted in this room: <strong><span id="roomCount">0</span>/9</strong>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sync Indicator -->
-    <div class="sync-indicator" id="syncIndicator">🔄 Syncing...</div>
-
-
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getDatabase, ref, set, get, onValue, update, remove, onDisconnect } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
-        
-        window.firebase = { initializeApp };
-        window.firebaseDB = { ref, set, get, onValue, update, remove, onDisconnect };
-        window.getDatabase = getDatabase;
-    </script>
-    
     <!-- Background Music -->
     <audio id="backgroundMusic" loop>
         <source src="music/say-na-say-na.mp3" type="audio/mpeg">
     </audio>
-    
+
     <!-- Music Control Button -->
     <button id="musicToggle" class="music-toggle" onclick="toggleMusic()" title="Toggle Music">
-        🔊
+        &#x1f50a;
     </button>
 
-    <!-- Photo expand/collapse -->
+    <!-- Minimal JS -->
     <script>
     var expandedCard = null;
     function expandPhoto(card) {
@@ -478,10 +122,22 @@
         }
         document.getElementById('photoBackdrop').classList.remove('visible');
     }
+    function toggleMusic() {
+        var audio = document.getElementById('backgroundMusic');
+        var btn = document.getElementById('musicToggle');
+        if (audio.paused) {
+            audio.play();
+            btn.textContent = '\u{1F50A}';
+            btn.classList.remove('muted');
+        } else {
+            audio.pause();
+            btn.textContent = '\u{1F507}';
+            btn.classList.add('muted');
+        }
+    }
     </script>
+
     <!-- Slideshow Script -->
     <script src="js/slideshow.js"></script>
-    <!-- Application Script -->
-    <script src="js/app.js"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 50px;
     color: #64748b;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
@@ -131,7 +131,7 @@
 }
 
 .slideshow-message p {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display', Georgia, serif;
     color: #64748b;
     font-size: 15px;
     font-style: italic;
