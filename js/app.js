@@ -397,32 +397,8 @@
             updateResultsTeamMembers();
         }
         
-        // Update results section with team members for Rocket and Anaar
         function updateResultsTeamMembers() {
-            const rocketPlayersDiv = document.getElementById('rocketPlayersDisplay');
-            const anaarPlayersDiv = document.getElementById('anaarPlayersDisplay');
-            
-            if (rocketPlayersDiv && teamPlayersData['Rocket']) {
-                const rocketPlayers = teamPlayersData['Rocket'];
-                if (rocketPlayers.length > 0) {
-                    rocketPlayersDiv.innerHTML = rocketPlayers.map(player => 
-                        `<span style="background: #fff9e6; padding: 5px 12px; border-radius: 6px; color: #333; font-size: 12px; border: 1px solid #FFD700;">${player}</span>`
-                    ).join('');
-                } else {
-                    rocketPlayersDiv.innerHTML = '<span style="color: #666; font-size: 12px;">No players assigned</span>';
-                }
-            }
-            
-            if (anaarPlayersDiv && teamPlayersData['Anaar']) {
-                const anaarPlayers = teamPlayersData['Anaar'];
-                if (anaarPlayers.length > 0) {
-                    anaarPlayersDiv.innerHTML = anaarPlayers.map(player => 
-                        `<span style="background: #f5f5f5; padding: 5px 12px; border-radius: 6px; color: #333; font-size: 12px; border: 1px solid #C0C0C0;">${player}</span>`
-                    ).join('');
-                } else {
-                    anaarPlayersDiv.innerHTML = '<span style="color: #666; font-size: 12px;">No players assigned</span>';
-                }
-            }
+            // No-op: results section removed
         }
         
         // Load game settings (timer, bonus time) from Firebase
@@ -485,63 +461,37 @@
         }
         
         function updateChallengeCards(status) {
-            // Challenge descriptions with full details
-            const challengeInfo = {
+            const gameInfo = {
                 1: {
                     title: 'Memory Challenge',
                     shortDesc: 'Test your memory skills!',
+                    challengeKey: 'ch1',
+                    cardId: 'game1Card',
                     tooltip: `<strong>📋 Point System</strong>
-                        <div class="score-line"><strong>Game 1:</strong></div>
                         <div class="score-line">🥇 1st Place: 50 points</div>
-                        <div class="score-line">📉 Last Place: 0 points</div>
-                        <div class="score-line" style="margin-top: 8px;"><strong>Game 2:</strong></div>
-                        <div class="score-line">✅ Each right answer: +5 points</div>
-                        <div class="score-line">❌ No negative marking</div>`
+                        <div class="score-line">📉 Last Place: 0 points</div>`,
+                    onClick: () => selectChallenge1()
                 },
                 2: {
-                    title: "Cliche' Party Games",
-                    shortDesc: 'Classic party fun!',
-                    tooltip: `<strong>🎲 Point System</strong>
-                        <div class="score-line"><strong>Game 1:</strong></div>
-                        <div class="score-line">🎮 Each team plays 2 rounds</div>
-                        <div class="score-line">🏆 Win a round: 20 points</div>
-                        <div class="score-line">❌ Lose a round: 0 points</div>
-                        <div class="score-line" style="margin-top: 8px;"><strong>Game 2:</strong></div>
-                        <div class="score-line">✅ Right guess: +5 points</div>
-                        <div class="score-line">❌ Wrong guess: -5 points</div>`
-                },
-                3: {
-                    title: "It's Trivia Time",
-                    shortDesc: 'Test your knowledge!',
-                    tooltip: `<strong>🧠 Point System (36 Questions Total)</strong>
-                        <div class="score-line">📝 3 sets × 12 questions each</div>
-                        <div class="score-line">👥 2 frontline players from each team per set</div>
-                        <div class="score-line">⏱️ 10 second timer for frontline players</div>
-                        <div class="score-line">⚡ Frontline correct answer: 5 points</div>
-                        <div class="score-line">👥 Team answer (after 10s): 3 points</div>
-                        <div class="score-line">🔢 Maximum 2 guesses per question</div>
-                        <div class="score-line">✨ No negative marking</div>
-                        <div class="score-line" style="margin-top: 6px; color: #51cf66;">🏆 Each team has 1 MVP who can play 2 rounds!</div>`
-                },
-                4: {
                     title: 'The Ultimate Spot Finder',
                     shortDesc: 'Hunt & count items in each room!',
+                    challengeKey: 'ch4',
+                    cardId: 'game2Card',
                     tooltip: `<strong>🔎 Point System</strong>
                         <div class="score-line">✅ Correct Find: +5 points</div>
                         <div class="score-line">❌ False Find: -5 points</div>
-                        <div class="score-line" style="margin-top: 6px; color: #f093fb;">💡 81 total locations (9 rooms × 9 markers)</div>
-                        <div class="score-line" style="color: #999;">Be accurate to maximize your score!</div>`
+                        <div class="score-line" style="margin-top: 6px;">💡 81 total locations (9 rooms × 9 markers)</div>`,
+                    onClick: () => selectChallenge4()
                 }
             };
-            
-            // Update each challenge card based on unlock status
-            for (let i = 1; i <= 4; i++) {
-                const card = document.getElementById(`challenge${i}`);
-                if (!card) continue; // Skip if card doesn't exist yet
-                
-                const isUnlocked = status[`ch${i}`] === true;
-                const info = challengeInfo[i];
-                
+
+            for (let i = 1; i <= 2; i++) {
+                const info = gameInfo[i];
+                const card = document.getElementById(info.cardId);
+                if (!card) continue;
+
+                const isUnlocked = status[info.challengeKey] === true;
+
                 if (isUnlocked) {
                     card.classList.add('unlocked');
                     card.innerHTML = `
@@ -553,42 +503,22 @@
                             <small style="font-size: 10px; opacity: 0.7; margin-top: 5px; display: block;">💡 Hover for details</small>
                         </div>
                     `;
-                    console.log(`✅ Challenge ${i} unlocked`);
-                    
-                    // Add mobile tap support for tooltips
+
                     card.addEventListener('touchstart', function(e) {
-                        // Toggle tooltip on tap for mobile
                         if (window.innerWidth <= 768) {
-                            // Remove show-tooltip from all other cards
                             document.querySelectorAll('.challenge-card').forEach(c => {
                                 if (c !== card) c.classList.remove('show-tooltip');
                             });
                             card.classList.toggle('show-tooltip');
-                            
-                            // If Challenge 4, don't prevent navigation
-                            if (i !== 4) {
-                                e.stopPropagation();
-                            }
                         }
                     });
-                    
-                    // Set up click handlers for playable challenges
-                    if (i === 1) {
-                        card.onclick = () => selectChallenge1();
-                        card.style.cursor = 'pointer';
-                    } else if (i === 4) {
-                        card.onclick = () => selectChallenge4();
-                        card.style.cursor = 'pointer';
-                    } else {
-                        // Other challenges (2, 3) are not interactive yet
-                        card.onclick = null;
-                        card.style.cursor = 'default';
-                    }
+
+                    card.onclick = info.onClick;
+                    card.style.cursor = 'pointer';
                 } else {
                     card.classList.remove('unlocked');
-                    card.innerHTML = `Challenge ${i}<br>🔒`;
+                    card.innerHTML = `Game ${i}<br>🔒`;
                     card.onclick = null;
-                    console.log(`🔒 Challenge ${i} locked`);
                 }
             }
         }
@@ -1119,23 +1049,13 @@
         const CHALLENGE1_PASSWORD = atob('bWVtb3J5'); // "memory"
         
         // Challenge 1 State
-        let challenge1CurrentGame = null; // 'game1' or 'game2'
         let game1Items = [];
-        let game2AddedItems = [];
-        let game2RemovedItems = [];
-        let game2Unlocked = false; // Game 2 lock status
-        
+
         // Game 1 Timer
         let game1TimeRemaining = 75; // 75 seconds default
         let game1TimerInterval = null;
         let game1TimerActive = false;
         let game1InitialTimer = 75; // Will be loaded from Firebase
-        
-        // Game 2 Timer
-        let game2TimeRemaining = 60; // 60 seconds default
-        let game2TimerInterval = null;
-        let game2TimerActive = false;
-        let game2InitialTimer = 60; // Will be loaded from Firebase
         
         window.selectChallenge1 = function() {
             document.getElementById('challengesScreen').classList.add('hidden');
@@ -1145,56 +1065,34 @@
         window.startChallenge1 = function() {
             const password = document.getElementById('challenge1Password').value;
             const errorEl = document.getElementById('challenge1PasswordError');
-            
+
             if (password === CHALLENGE1_PASSWORD) {
                 errorEl.classList.remove('show');
-                document.getElementById('challenge1PasswordScreen').classList.add('hidden');
-                document.getElementById('challenge1SelectionScreen').classList.remove('hidden');
-                document.getElementById('ch1SelectionTeamName').textContent = teamName;
                 document.getElementById('challenge1Password').value = '';
-                
-                // Check Game 2 lock status from Firebase
-                checkGame2LockStatus();
+
+                // Check if game is already completed
+                checkGameCompletionStatus('game1').then(isCompleted => {
+                    if (isCompleted) {
+                        showSubmissionModal('game1');
+                        return;
+                    }
+
+                    // Go straight to game1Screen
+                    document.getElementById('challenge1PasswordScreen').classList.add('hidden');
+                    const game1Screen = document.getElementById('game1Screen');
+                    game1Screen.classList.remove('hidden');
+                    game1Screen.classList.add('active');
+
+                    document.getElementById('game1TeamName').textContent = teamName;
+                    document.getElementById('game1PlayerName').textContent = `Player: ${playerName}`;
+
+                    loadGame1Settings().then(() => {
+                        initializeGame1();
+                        checkAndStartGame1Timer();
+                    });
+                });
             } else {
                 errorEl.classList.add('show');
-            }
-        }
-        
-        // Check if Game 2 is unlocked by admin
-        function checkGame2LockStatus() {
-            if (!database || !window.firebaseDB) return;
-            
-            const { ref, onValue } = window.firebaseDB;
-            const game2StatusRef = ref(database, 'game2Status/unlocked');
-            
-            onValue(game2StatusRef, (snapshot) => {
-                game2Unlocked = snapshot.val() === true;
-                updateGame2Button();
-            });
-        }
-        
-        function updateGame2Button() {
-            const game2Card = document.querySelector('[onclick="selectGame2()"]');
-            if (!game2Card) return;
-            
-            // Find the description and lock text by ID
-            const descriptionText = document.getElementById('game2Description');
-            const lockText = document.getElementById('game2LockText');
-            
-            if (game2Unlocked) {
-                // Show description, hide lock text
-                game2Card.style.opacity = '1';
-                game2Card.style.cursor = 'pointer';
-                game2Card.style.pointerEvents = 'auto';
-                if (descriptionText) descriptionText.style.display = 'block';
-                if (lockText) lockText.style.display = 'none';
-            } else {
-                // Hide description, show lock text
-                game2Card.style.opacity = '0.5';
-                game2Card.style.cursor = 'not-allowed';
-                game2Card.style.pointerEvents = 'none';
-                if (descriptionText) descriptionText.style.display = 'none';
-                if (lockText) lockText.style.display = 'block';
             }
         }
         
@@ -1205,37 +1103,6 @@
             document.getElementById('challengesScreen').classList.remove('hidden');
         }
         
-        window.backToChallengesFromGame1Selection = function() {
-            document.getElementById('challenge1SelectionScreen').classList.add('hidden');
-            document.getElementById('challengesScreen').classList.remove('hidden');
-        }
-        
-        window.selectGame1 = function() {
-            // Check if game is already completed
-            checkGameCompletionStatus('game1').then(isCompleted => {
-                if (isCompleted) {
-                    showSubmissionModal('game1');
-                    return;
-                }
-                
-                challenge1CurrentGame = 'game1';
-                document.getElementById('challenge1SelectionScreen').classList.add('hidden');
-                
-                const game1Screen = document.getElementById('game1Screen');
-                game1Screen.classList.remove('hidden');
-                game1Screen.classList.add('active');
-                
-                // Initialize Game 1
-                document.getElementById('game1TeamName').textContent = teamName;
-                document.getElementById('game1PlayerName').textContent = `Player: ${playerName}`;
-                
-                // Load timer settings and start game
-                loadGame1Settings().then(() => {
-                    initializeGame1();
-                    checkAndStartGame1Timer();
-                });
-            });
-        }
         
         // Check if a game is already completed
         async function checkGameCompletionStatus(gameName) {
@@ -1431,239 +1298,17 @@
             if (addBtn) addBtn.disabled = true;
         }
         
-        window.selectGame2 = function() {
-            if (!game2Unlocked) {
-                alert('Game 2 is locked! Please wait for admin to unlock it.');
-                return;
-            }
             
-            // Check if game is already completed
-            checkGameCompletionStatus('game2').then(isCompleted => {
-                if (isCompleted) {
-                    showSubmissionModal('game2');
-                    return;
-                }
-                
-                challenge1CurrentGame = 'game2';
-                document.getElementById('challenge1SelectionScreen').classList.add('hidden');
-                
-                const game2Screen = document.getElementById('game2Screen');
-                game2Screen.classList.remove('hidden');
-                game2Screen.classList.add('active');
-                
-                // Initialize Game 2
-                document.getElementById('game2TeamName').textContent = teamName;
-                document.getElementById('game2PlayerName').textContent = `Player: ${playerName}`;
-                
-                // Load timer settings and start game
-                loadGame2Settings().then(() => {
-                    initializeGame2();
-                    checkAndStartGame2Timer();
-                });
-            });
-        }
-        
-        // Load Game 2 timer settings from Firebase
-        async function loadGame2Settings() {
-            if (!database || !window.firebaseDB) {
-                console.log('⏳ Waiting for Firebase...');
-                await new Promise(resolve => setTimeout(resolve, 500));
-                return loadGame2Settings();
-            }
-            
-            try {
-                const { ref, get, set } = window.firebaseDB;
-                const settingsRef = ref(database, 'gameSettings/game2InitialTimer');
-                const snapshot = await get(settingsRef);
-                if (snapshot.exists()) {
-                    game2InitialTimer = snapshot.val();
-                    console.log('✅ Game 2 timer loaded from Firebase:', game2InitialTimer);
-                } else {
-                    // Set default if not exists
-                    game2InitialTimer = 60;
-                    await set(settingsRef, 60);
-                    console.log('📝 Set default Game 2 timer:', 60);
-                }
-            } catch (error) {
-                console.error('❌ Error loading Game 2 settings:', error);
-                game2InitialTimer = 60; // fallback
-            }
-        }
-        
-        // Check and start/join Game 2 timer
-        async function checkAndStartGame2Timer() {
-            if (!database || !window.firebaseDB) {
-                console.log('⏳ Waiting for Firebase...');
-                await new Promise(resolve => setTimeout(resolve, 500));
-                return checkAndStartGame2Timer();
-            }
-            
-            const teamId = teamName.toLowerCase();
-            const { ref, get } = window.firebaseDB;
-            const gameStateRef = ref(database, `challenge1/${teamId}/game2State`);
-            
-            try {
-                const snapshot = await get(gameStateRef);
-                
-                if (snapshot.exists()) {
-                    const state = snapshot.val();
-                    if (state.gameActive) {
-                        // Game is already running, sync to current time
-                        console.log('⏱️ Joining active Game 2...');
-                        syncGame2Timer();
-                    } else {
-                        // Game hasn't started, start it
-                        console.log('🚀 Starting new Game 2...');
-                        startGame2Timer();
-                    }
-                } else {
-                    // No game state, start fresh
-                    console.log('🆕 Creating new Game 2 session...');
-                    startGame2Timer();
-                }
-            } catch (error) {
-                console.error('❌ Error checking Game 2 state:', error);
-                startGame2Timer(); // fallback to starting
-            }
-        }
-        
-        // Start Game 2 timer
-        async function startGame2Timer() {
-            if (!database || !window.firebaseDB) return;
-            
-            const teamId = teamName.toLowerCase();
-            const { ref, set } = window.firebaseDB;
-            const gameStateRef = ref(database, `challenge1/${teamId}/game2State`);
-            
-            const startTime = Date.now();
-            
-            await set(gameStateRef, {
-                gameActive: true,
-                startTime: startTime,
-                initialTime: game2InitialTimer,
-                endTime: startTime + (game2InitialTimer * 1000)
-            });
-            
-            console.log('✅ Game 2 timer started');
-            syncGame2Timer();
-        }
-        
-        // Sync Game 2 timer across all players
-        function syncGame2Timer() {
-            if (!database || !window.firebaseDB) return;
-            
-            const teamId = teamName.toLowerCase();
-            const { ref, onValue } = window.firebaseDB;
-            const gameStateRef = ref(database, `challenge1/${teamId}/game2State`);
-            
-            // Listen for timer updates
-            onValue(gameStateRef, (snapshot) => {
-                if (snapshot.exists()) {
-                    const state = snapshot.val();
-                    
-                    if (state.gameActive) {
-                        const now = Date.now();
-                        const timeElapsed = Math.floor((now - state.startTime) / 1000);
-                        game2TimeRemaining = Math.max(0, state.initialTime - timeElapsed);
-                        
-                        updateGame2TimerDisplay();
-                        
-                        if (game2TimeRemaining <= 0 && !game2TimerActive) {
-                            endGame2();
-                        }
-                        
-                        // Start local interval if not already running
-                        if (!game2TimerInterval) {
-                            game2TimerInterval = setInterval(() => {
-                                const now = Date.now();
-                                const timeElapsed = Math.floor((now - state.startTime) / 1000);
-                                game2TimeRemaining = Math.max(0, state.initialTime - timeElapsed);
-                                updateGame2TimerDisplay();
-                                
-                                if (game2TimeRemaining <= 0) {
-                                    clearInterval(game2TimerInterval);
-                                    game2TimerInterval = null;
-                                    endGame2();
-                                }
-                            }, 1000);
-                        }
-                    }
-                }
-            });
-        }
-        
-        // Update Game 2 timer display
-        function updateGame2TimerDisplay() {
-            const timerElement = document.getElementById('game2Timer');
-            if (!timerElement) return;
-            
-            const minutes = Math.floor(game2TimeRemaining / 60);
-            const seconds = game2TimeRemaining % 60;
-            timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Color change when time is running low
-            if (game2TimeRemaining <= 10) {
-                timerElement.style.color = '#dc3545';
-            } else if (game2TimeRemaining <= 30) {
-                timerElement.style.color = '#ffc107';
-            } else {
-                timerElement.style.color = '#f093fb';
-            }
-        }
-        
-        // End Game 2
-        async function endGame2() {
-            if (game2TimerActive) return; // Prevent multiple calls
-            game2TimerActive = true;
-            
-            if (!database || !window.firebaseDB) return;
-            
-            const teamId = teamName.toLowerCase();
-            const { ref, update } = window.firebaseDB;
-            const gameStateRef = ref(database, `challenge1/${teamId}/game2State`);
-            
-            await update(gameStateRef, {
-                gameActive: false,
-                completed: true
-            });
-            
-            alert('⏰ Time\'s up! Game 2 has ended.');
-            
-            // Disable inputs
-            const addedInput = document.getElementById('game2AddedInput');
-            const removedInput = document.getElementById('game2RemovedInput');
-            const addedBtn = document.querySelector('#game2Screen button[onclick*="addGame2Added"]');
-            const removedBtn = document.querySelector('#game2Screen button[onclick*="addGame2Removed"]');
-            if (addedInput) addedInput.disabled = true;
-            if (removedInput) removedInput.disabled = true;
-            if (addedBtn) addedBtn.disabled = true;
-            if (removedBtn) removedBtn.disabled = true;
-        }
-        
         window.backToGame1Selection = function() {
-            // Clear timer interval
             if (game1TimerInterval) {
                 clearInterval(game1TimerInterval);
                 game1TimerInterval = null;
             }
-            
+
             const game1Screen = document.getElementById('game1Screen');
             game1Screen.classList.add('hidden');
             game1Screen.classList.remove('active');
-            document.getElementById('challenge1SelectionScreen').classList.remove('hidden');
-        }
-        
-        window.backToGame2Selection = function() {
-            // Clear timer interval
-            if (game2TimerInterval) {
-                clearInterval(game2TimerInterval);
-                game2TimerInterval = null;
-            }
-            
-            const game2Screen = document.getElementById('game2Screen');
-            game2Screen.classList.add('hidden');
-            game2Screen.classList.remove('active');
-            document.getElementById('challenge1SelectionScreen').classList.remove('hidden');
+            document.getElementById('challengesScreen').classList.remove('hidden');
         }
         
         // Game 1: Add/Remove Items
@@ -1766,133 +1411,6 @@
             set(game1Ref, {
                 items: game1Items,
                 count: game1Items.length,
-                lastUpdated: Date.now()
-            }).catch(err => console.error('Sync error:', err));
-        }
-        
-        // Game 2: Added/Removed Items
-        function initializeGame2() {
-            game2AddedItems = [];
-            game2RemovedItems = [];
-            updateGame2Display();
-            
-            // Set up Firebase listener for real-time sync
-            if (database && window.firebaseDB) {
-                const { ref, onValue } = window.firebaseDB;
-                const teamId = teamName.toLowerCase();
-                const game2Ref = ref(database, `challenge1/${teamId}/game2`);
-                
-                onValue(game2Ref, (snapshot) => {
-                    const data = snapshot.val();
-                    if (data) {
-                        if (data.added) game2AddedItems = data.added;
-                        if (data.removed) game2RemovedItems = data.removed;
-                        updateGame2Display();
-                    }
-                });
-            }
-        }
-        
-        window.addGame2Added = function() {
-            const input = document.getElementById('game2AddedInput');
-            const text = input.value.trim();
-            
-            if (!text) return;
-            if (game2AddedItems.length >= 5) {
-                alert('Maximum 5 items in Added section!');
-                return;
-            }
-            
-            game2AddedItems.push({
-                text: text,
-                id: Date.now(),
-                playerName: playerName
-            });
-            
-            input.value = '';
-            updateGame2Display();
-            syncGame2ToFirebase();
-        }
-        
-        window.addGame2Removed = function() {
-            const input = document.getElementById('game2RemovedInput');
-            const text = input.value.trim();
-            
-            if (!text) return;
-            if (game2RemovedItems.length >= 5) {
-                alert('Maximum 5 items in Removed section!');
-                return;
-            }
-            
-            game2RemovedItems.push({
-                text: text,
-                id: Date.now(),
-                playerName: playerName
-            });
-            
-            input.value = '';
-            updateGame2Display();
-            syncGame2ToFirebase();
-        }
-        
-        window.removeGame2Added = function(id) {
-            game2AddedItems = game2AddedItems.filter(item => item.id !== id);
-            updateGame2Display();
-            syncGame2ToFirebase();
-        }
-        
-        window.removeGame2Removed = function(id) {
-            game2RemovedItems = game2RemovedItems.filter(item => item.id !== id);
-            updateGame2Display();
-            syncGame2ToFirebase();
-        }
-        
-        function updateGame2Display() {
-            const addedContainer = document.getElementById('game2AddedItems');
-            const removedContainer = document.getElementById('game2RemovedItems');
-            const addedCountEl = document.getElementById('game2AddedCount');
-            const removedCountEl = document.getElementById('game2RemovedCount');
-            
-            addedCountEl.textContent = game2AddedItems.length;
-            removedCountEl.textContent = game2RemovedItems.length;
-            
-            // Added items display
-            if (game2AddedItems.length === 0) {
-                addedContainer.innerHTML = '<p style="color: #666; text-align: center; margin: auto;">No items added</p>';
-            } else {
-                addedContainer.innerHTML = game2AddedItems.map(item => `
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: white; border-radius: 6px;">
-                        <span style="color: #155724; font-weight: 500;">${item.text}</span>
-                        <button onclick="removeGame2Added(${item.id})" style="background: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px;">✕</button>
-                    </div>
-                `).join('');
-            }
-            
-            // Removed items display
-            if (game2RemovedItems.length === 0) {
-                removedContainer.innerHTML = '<p style="color: #666; text-align: center; margin: auto;">No items removed</p>';
-            } else {
-                removedContainer.innerHTML = game2RemovedItems.map(item => `
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: white; border-radius: 6px;">
-                        <span style="color: #721c24; font-weight: 500;">${item.text}</span>
-                        <button onclick="removeGame2Removed(${item.id})" style="background: #28a745; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px;">✕</button>
-                    </div>
-                `).join('');
-            }
-        }
-        
-        function syncGame2ToFirebase() {
-            if (!database || !window.firebaseDB) return;
-            
-            const { ref, set } = window.firebaseDB;
-            const teamId = teamName.toLowerCase();
-            const game2Ref = ref(database, `challenge1/${teamId}/game2`);
-            
-            set(game2Ref, {
-                added: game2AddedItems,
-                removed: game2RemovedItems,
-                addedCount: game2AddedItems.length,
-                removedCount: game2RemovedItems.length,
                 lastUpdated: Date.now()
             }).catch(err => console.error('Sync error:', err));
         }
@@ -2050,64 +1568,8 @@
                         content = '<div class="submission-empty">No submissions found</div>';
                     }
                     
-                } else if (challengeType === 'game2') {
-                    title.textContent = '🔒 Game 2 Completed!';
-                    subtitle.textContent = `Team ${teamName}'s Added & Removed Items`;
-                    
-                    const game2Ref = ref(database, `challenge1/${teamId}/game2`);
-                    const snapshot = await get(game2Ref);
-                    
-                    if (snapshot.exists()) {
-                        const data = snapshot.val();
-                        let added = data.added || [];
-                        let removed = data.removed || [];
-                        
-                        // Convert to array if Firebase stored it as an object
-                        if (typeof added === 'object' && !Array.isArray(added)) {
-                            added = Object.values(added).filter(item => item !== null && item !== undefined);
-                        }
-                        if (typeof removed === 'object' && !Array.isArray(removed)) {
-                            removed = Object.values(removed).filter(item => item !== null && item !== undefined);
-                        }
-                        
-                        // Extract text from item objects (items have {text, id, playerName} structure)
-                        added = added.map(item => {
-                            if (typeof item === 'object' && item.text) {
-                                return item.text;
-                            }
-                            return String(item);
-                        });
-                        removed = removed.map(item => {
-                            if (typeof item === 'object' && item.text) {
-                                return item.text;
-                            }
-                            return String(item);
-                        });
-                        
-                        content = `
-                            <div class="submission-section">
-                                <h3>➕ Added Items (${added.length}/5)</h3>
-                                ${added.length > 0 ? `
-                                    <div class="submission-items">
-                                        ${added.map(item => `<div class="submission-item">${item}</div>`).join('')}
-                                    </div>
-                                ` : '<div class="submission-empty">No items added</div>'}
-                            </div>
-                            <div class="submission-section">
-                                <h3>➖ Removed Items (${removed.length}/5)</h3>
-                                ${removed.length > 0 ? `
-                                    <div class="submission-items">
-                                        ${removed.map(item => `<div class="submission-item">${item}</div>`).join('')}
-                                    </div>
-                                ` : '<div class="submission-empty">No items removed</div>'}
-                            </div>
-                        `;
-                    } else {
-                        content = '<div class="submission-empty">No submissions found</div>';
-                    }
-                    
                 } else if (challengeType === 'challenge4') {
-                    title.textContent = '🔒 Challenge 4 Completed!';
+                    title.textContent = '🔒 Game 2 Completed!';
                     subtitle.textContent = `Team ${teamName}'s House Markings`;
                     
                     const markersRef = ref(database, `teams/${teamId}/markers`);
