@@ -635,12 +635,19 @@ body {
 @media (max-width: 480px) {
   body {
     padding: 0;
+    background: #fff;
   }
 
   .container {
     padding: 24px 14px;
     border: none;
     border-radius: 0;
+    box-shadow: none;
+    background: #fff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    max-width: 100%;
+    min-height: 100vh;
   }
 
   .games-grid {
