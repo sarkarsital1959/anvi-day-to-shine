@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&family=Pacifico&display=swap" rel="stylesheet">
 
     <!-- External Styles -->
     <link rel="stylesheet" href="css/styles.css">
@@ -21,16 +21,24 @@
         <button class="slideshow-skip">Skip</button>
         <div class="slideshow-message">
             <h1>Let's celebrate her!</h1>
-            <p>Happy Birthday, Anvi</p>
         </div>
     </div>
 
     <div class="container">
         <!-- Header -->
         <header class="page-header">
-            <h1 class="page-title"><em>It's Anvi's Day to Shine</em></h1>
-            <p class="page-subtitle">Happy Birthday, Anvi!</p>
+            <span class="overline">&mdash; Birthday Edition &mdash;</span>
+            <h1 class="hero-title"><em>It's Anvi's Day<br>to Shine</em></h1>
         </header>
+
+        <!-- Event Info -->
+        <div class="event-info">
+            <span>Sat, 21 Feb</span>
+            <span class="event-dot"></span>
+            <span>4 PM onwards</span>
+            <span class="event-dot"></span>
+            <span>Cake at 6:30 PM</span>
+        </div>
 
         <!-- Photo Collage -->
         <div class="photo-collage" id="photoCollage">
@@ -47,52 +55,42 @@
         </div>
         <div class="photo-backdrop" id="photoBackdrop" onclick="collapsePhoto()"></div>
 
-        <!-- Divider -->
-        <div class="divider"></div>
+        <!-- Section Divider -->
+        <div class="section-divider"><span>The Games</span></div>
 
-        <!-- Game 1 -->
-        <div class="game-card">
-            <h2>Two Truths & Two Lies</h2>
-            <ul class="rules">
-                <li>Each team (4 players) comes forward together</li>
-                <li>Each player says one statement &mdash; team decides which 2 are truths, which 2 are lies</li>
-                <li>Other 4 teams discuss and guess which 2 are lies</li>
-                <li>Every team gets a turn. Performing team doesn't score that round.</li>
-            </ul>
-            <div class="scoring">
-                <span class="scoring-item">Both correct <strong>20 pts</strong></span>
-                <span class="scoring-item">One correct <strong>10 pts</strong></span>
-                <span class="scoring-item">Both wrong <strong>0 pts</strong></span>
+        <!-- Game Tiles -->
+        <div class="game-grid">
+            <div class="game-tile" onclick="openGameModal(1)">
+                <span class="overline">Game One</span>
+                <h3 class="game-tile-title">Two Truths &amp; Two Lies</h3>
+                <p class="game-tile-teaser">Can you spot the lies?</p>
+            </div>
+            <div class="game-tile" onclick="openGameModal(2)">
+                <span class="overline">Game Two</span>
+                <h3 class="game-tile-title">Paper Telephone</h3>
+                <p class="game-tile-teaser">Draw it, guess it, laugh at it</p>
+            </div>
+            <div class="game-tile" onclick="openGameModal(3)">
+                <span class="overline">Game Three</span>
+                <h3 class="game-tile-title">Two Rooms &amp; a Boom</h3>
+                <p class="game-tile-teaser">Trust no one. Find the Bomber.</p>
+            </div>
+        </div>
+
+        <!-- Game Modal -->
+        <div class="modal-backdrop" id="gameModal">
+            <div class="modal-panel">
+                <button class="modal-close" onclick="closeGameModal()" aria-label="Close"></button>
+                <div id="modalContent"></div>
             </div>
         </div>
 
         <!-- Divider -->
-        <div class="divider"></div>
-
-        <!-- Game 2 -->
-        <div class="game-card">
-            <h2>Paper Telephone</h2>
-            <ul class="rules">
-                <li>Each team plays within themselves (4 players, simultaneous)</li>
-                <li>Pick a prompt card, fill in the blanks &rarr; pass &rarr; draw it (30 sec) &rarr; pass &rarr; guess &rarr; pass &rarr; draw</li>
-                <li>Chain loops back. Read the full chain aloud.</li>
-                <li>3 rounds: <em>Warming Up</em> &rarr; <em>Getting Spicy</em> &rarr; <em>No Turning Back</em></li>
-                <li>Everyone votes on the best / funniest combo</li>
-            </ul>
-            <div class="scoring">
-                <span class="scoring-item">Best combo <strong>20 pts</strong></span>
-                <span class="scoring-item">Runner up <strong>10 pts</strong></span>
-            </div>
-        </div>
-
-        <!-- Divider -->
-        <div class="divider"></div>
+        <div class="section-divider"><span></span></div>
 
         <!-- Partiful CTA -->
         <div class="cta-section">
-            <a href="https://partiful.com/e/cIr9wLWguc4iEw3yBb8I" target="_blank" class="cta-link">
-                View Event on Partiful
-            </a>
+            <a href="https://partiful.com/e/cIr9wLWguc4iEw3yBb8I" target="_blank" class="cta-link">View Event on Partiful</a>
         </div>
     </div>
 
@@ -135,6 +133,76 @@
             btn.classList.add('muted');
         }
     }
+
+    var gameData = {
+        1: {
+            overline: 'Game One',
+            title: 'Two Truths & Two Lies',
+            rules: [
+                'Each team (4 players) comes forward together',
+                'Each player says one statement \u2014 team decides which 2 are truths, which 2 are lies',
+                'Other 4 teams discuss and guess which 2 are lies',
+                'Every team gets a turn. Performing team doesn\'t score that round.'
+            ],
+            scoring: [
+                { label: 'Both correct', pts: '20 pts' },
+                { label: 'One correct', pts: '10 pts' },
+                { label: 'Both wrong', pts: '0 pts' }
+            ]
+        },
+        2: {
+            overline: 'Game Two',
+            title: 'Paper Telephone',
+            rules: [
+                'Each team plays within themselves (4 players, simultaneous)',
+                'Pick a prompt card, fill in the blanks \u2192 pass \u2192 draw it (30 sec) \u2192 pass \u2192 guess \u2192 pass \u2192 draw',
+                'Chain loops back. Read the full chain aloud.',
+                '3 rounds: Warming Up \u2192 Getting Spicy \u2192 No Turning Back',
+                'Everyone votes on the best / funniest combo'
+            ],
+            scoring: [
+                { label: 'Best combo', pts: '20 pts' },
+                { label: 'Runner up', pts: '10 pts' }
+            ]
+        },
+        3: {
+            overline: 'Game Three',
+            title: 'Two Rooms & a Boom',
+            rules: [
+                'Everyone is secretly Blue Team or Red Team. One Blue player is the President, one Red player is the Bomber.',
+                'Split into two rooms (10 per room). Talk, argue, bluff \u2014 figure out who\'s who.',
+                '3 rounds (3 min / 2 min / 1 min). Each round, room leaders pick 2 hostages to swap to the other room.',
+                'After Round 3, reveal all cards. If the Bomber is in the President\'s room \u2014 Red wins. If not \u2014 Blue wins.'
+            ],
+            scoring: []
+        }
+    };
+
+    function openGameModal(id) {
+        var game = gameData[id];
+        var html = '<span class="overline">' + game.overline + '</span>';
+        html += '<h2 class="modal-title">' + game.title + '</h2>';
+        html += '<ul class="rules">';
+        game.rules.forEach(function(r) { html += '<li>' + r + '</li>'; });
+        html += '</ul>';
+        html += '<div class="scoring">';
+        game.scoring.forEach(function(s) {
+            html += '<span class="scoring-item">' + s.label + ' <strong>' + s.pts + '</strong></span>';
+        });
+        html += '</div>';
+        document.getElementById('modalContent').innerHTML = html;
+        document.getElementById('gameModal').classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeGameModal() {
+        document.getElementById('gameModal').classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('gameModal').addEventListener('click', function(e) {
+        if (e.target === this) closeGameModal();
+    });
     </script>
 
     <!-- Slideshow Script -->
