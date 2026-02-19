@@ -560,11 +560,19 @@ body {
 
 @media (max-width: 768px) {
   body {
-    padding: 6px;
+    padding: 0;
+    background: var(--color-bg);
   }
 
   .container {
     padding: 36px 20px;
+    max-width: 100%;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-bg);
   }
 
   .photo-collage {
@@ -635,7 +643,7 @@ body {
 @media (max-width: 480px) {
   body {
     padding: 0;
-    background: #fff;
+    background: var(--color-bg);
   }
 
   .container {
@@ -643,7 +651,7 @@ body {
     border: none;
     border-radius: 0;
     box-shadow: none;
-    background: #fff;
+    background: var(--color-bg);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     max-width: 100%;
