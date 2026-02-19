@@ -14,25 +14,25 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: #9ab5ae;
+            background: #8aa8a0;
         }
 
         .card {
             width: 480px;
-            height: 840px;
+            height: 850px;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            background: linear-gradient(180deg, #cde6e0 0%, #d8e8e2 12%, #e4e0d6 30%, #ede6dc 50%, #f4efe8 70%, #FAF7F4 100%);
+            background: linear-gradient(180deg, #cde6e0 0%, #d6e6e0 10%, #e2dfd6 28%, #ece5db 45%, #f4efe8 65%, #FAF7F4 100%);
         }
 
-        /* Hero photo — beach shot as full-width background */
+        /* Hero photo */
         .card-hero {
             width: 100%;
-            height: 260px;
+            height: 280px;
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
@@ -41,7 +41,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 20%;
+            object-position: center 30%;
             display: block;
         }
         .card-hero-fade {
@@ -50,35 +50,12 @@
             left: 0;
             right: 0;
             height: 100px;
-            background: linear-gradient(to bottom, transparent, #dfe4dc);
+            background: linear-gradient(to bottom, transparent, #d9e2dc);
         }
 
-        /* Two small inset photos */
-        .card-insets {
-            display: flex;
-            gap: 10px;
-            margin-top: -32px;
-            position: relative;
-            z-index: 2;
-        }
-        .card-inset {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #FAF7F4;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .card-inset img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Body */
+        /* Content */
         .card-body {
-            padding: 20px 44px 36px;
+            padding: 16px 44px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -91,18 +68,17 @@
             letter-spacing: 0.3em;
             text-transform: uppercase;
             color: #7ba69e;
-            margin-bottom: 10px;
-            font-weight: 400;
+            margin-bottom: 8px;
         }
 
         .card-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 40px;
+            font-size: 42px;
             font-weight: 300;
             font-style: italic;
             line-height: 1.1;
             color: #2C2420;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             letter-spacing: -0.02em;
         }
 
@@ -111,60 +87,57 @@
             font-size: 13px;
             font-style: italic;
             color: #8C7B74;
-            font-weight: 300;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
 
         .card-rule {
             width: 36px;
             height: 1px;
             background: linear-gradient(90deg, transparent, #9ec5bc, transparent);
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
 
         .card-date {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 400;
             color: #2C2420;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .card-time {
             font-family: 'Jost', sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: #7ba69e;
             font-weight: 500;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .card-date-note {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 12px;
+            font-size: 11px;
             font-style: italic;
             color: #8C7B74;
-            font-weight: 300;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+        }
+
+        .card-location-dot {
+            width: 5px;
+            height: 5px;
+            border: 1.5px solid #9ec5bc;
+            border-radius: 50%;
+            margin: 0 auto 6px;
         }
 
         .card-location {
             font-family: 'Jost', sans-serif;
             font-size: 11px;
             color: #2C2420;
-            font-weight: 400;
             letter-spacing: 0.04em;
             line-height: 1.5;
-            margin-bottom: 22px;
-        }
-
-        .card-location-dot {
-            width: 6px;
-            height: 6px;
-            border: 1.5px solid #9ec5bc;
-            border-radius: 50%;
-            margin: 0 auto 8px;
+            margin-bottom: 16px;
         }
 
         .card-section-label {
@@ -173,26 +146,25 @@
             letter-spacing: 0.35em;
             text-transform: uppercase;
             color: #7ba69e;
-            margin-bottom: 10px;
-            font-weight: 400;
+            margin-bottom: 8px;
         }
 
         .card-activities {
             display: flex;
             justify-content: center;
-            gap: 28px;
-            margin-bottom: 8px;
+            gap: 24px;
+            margin-bottom: 16px;
         }
 
         .card-activity {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
 
         .card-activity-icon {
-            font-size: 12px;
+            font-size: 11px;
             color: #9ec5bc;
         }
 
@@ -201,27 +173,41 @@
             font-size: 9px;
             letter-spacing: 0.08em;
             color: #8C7B74;
-            font-weight: 400;
         }
 
-        .card-activity-note {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 11px;
-            font-style: italic;
-            color: #a89888;
-            font-weight: 300;
-            margin-bottom: 22px;
+        .card-rule-sm {
+            width: 28px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #9ec5bc, transparent);
+            margin-bottom: 14px;
         }
 
         .card-tagline {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 15px;
+            font-size: 14px;
             font-style: italic;
             color: #7ba69e;
-            font-weight: 400;
             line-height: 1.6;
+            margin-bottom: 20px;
         }
 
+        /* 4-photo grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .card-grid img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Bottom accent */
         .card-border-accent {
             position: absolute;
             bottom: 0;
@@ -229,21 +215,28 @@
             right: 0;
             height: 2px;
             background: linear-gradient(90deg, transparent, #9ec5bc 30%, #c8e6e0 50%, #9ec5bc 70%, transparent);
+            z-index: 3;
+        }
+
+        .card-border-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #9ec5bc 30%, #c8e6e0 50%, #9ec5bc 70%, transparent);
+            z-index: 5;
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <!-- Hero: beach photo -->
-        <div class="card-hero">
-            <img src="images/IMG_1866.jpg" alt="">
-            <div class="card-hero-fade"></div>
-        </div>
+        <div class="card-border-top"></div>
 
-        <!-- Circle inset photos -->
-        <div class="card-insets">
-            <div class="card-inset"><img src="images/IMG_1927.jpg" alt=""></div>
-            <div class="card-inset"><img src="images/IMG_2103.jpg" alt=""></div>
+        <!-- Hero: cake photo -->
+        <div class="card-hero">
+            <img src="images/IMG_2103.jpg" alt="">
+            <div class="card-hero-fade"></div>
         </div>
 
         <!-- Content -->
@@ -276,11 +269,18 @@
                     <span class="card-activity-label">Fun Games</span>
                 </div>
             </div>
-            <p class="card-activity-note">Outdoor sports if weather permits</p>
 
-            <div class="card-rule"></div>
+            <div class="card-rule-sm"></div>
 
             <p class="card-tagline">An afternoon filled with<br>warmth, laughter & sunshine</p>
+        </div>
+
+        <!-- 4-photo grid at bottom -->
+        <div class="card-grid">
+            <img src="images/IMG_1866.jpg" alt="">
+            <img src="images/IMG_1927.jpg" alt="">
+            <img src="images/IMG_1719.jpg" alt="">
+            <img src="images/IMG_2217.jpg" alt="">
         </div>
 
         <div class="card-border-accent"></div>
