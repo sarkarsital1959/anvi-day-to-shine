@@ -131,9 +131,10 @@
 /* Mobile */
 @media (max-width: 768px) {
     .slideshow-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-        max-width: 360px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        max-width: 88vw;
+        padding: 0 16px;
     }
     .slideshow-message {
         padding: 22px 28px;
@@ -142,7 +143,6 @@
     .slideshow-message h1 {
         font-size: 26px;
     }
-
     .slideshow-skip {
         top: 12px;
         right: 12px;
@@ -154,7 +154,10 @@
 @media (max-width: 480px) {
     .slideshow-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-        max-width: 280px;
+        gap: 8px;
+        max-width: 92vw;
+    }
+    .slideshow-message h1 {
+        font-size: 22px;
     }
 }

@@ -575,14 +575,22 @@ body {
     background: var(--color-bg);
   }
 
+  .page-header {
+    margin-bottom: 36px;
+  }
+
+  .event-info {
+    margin-bottom: 28px;
+  }
+
   .photo-collage {
-    gap: 6px;
-    max-width: 420px;
+    gap: 8px;
+    max-width: 100%;
   }
 
   .photo-card {
-    width: 68px;
-    height: 68px;
+    width: 80px;
+    height: 80px;
   }
 
   .game-card {
@@ -598,7 +606,7 @@ body {
   }
 
   .game-tile-title {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 
   .game-tile-teaser {
@@ -647,7 +655,7 @@ body {
   }
 
   .container {
-    padding: 24px 14px;
+    padding: 24px 18px;
     border: none;
     border-radius: 0;
     box-shadow: none;
@@ -658,43 +666,115 @@ body {
     min-height: 100vh;
   }
 
+  .page-header {
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .overline {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+  }
+
+  .event-info {
+    gap: 8px 10px;
+    margin-bottom: 24px;
+  }
+
+  .event-info span {
+    letter-spacing: 0.15em;
+  }
+
+  .photo-collage {
+    gap: 6px;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .photo-card {
+    width: calc((100% - 18px) / 4);
+    height: auto;
+    aspect-ratio: 1;
+  }
+
   .games-grid {
     grid-template-columns: 1fr;
   }
 
   .game-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .game-grid .game-tile:last-child:nth-child(odd) {
     max-width: 100%;
   }
 
-  .photo-card {
-    width: 56px;
-    height: 56px;
+  .game-tile {
+    padding: 20px 18px;
   }
 
-  .photo-collage {
-    gap: 5px;
+  .game-tile-title {
+    font-size: 1.15rem;
+  }
+
+  .game-tile-teaser {
+    font-size: 0.8rem;
+  }
+
+  .section-divider {
+    margin: 32px 0;
+    gap: 0.75rem;
   }
 
   .divider {
     margin: 24px auto;
   }
 
-  .section-divider {
-    margin: 28px 0;
-    gap: 1rem;
+  .cta-link {
+    padding: 14px 28px;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
   }
 
-  .game-tile {
-    padding: 24px 16px;
+  .cta-section {
+    padding: 4px 0 16px;
   }
 
   .modal-panel {
     max-height: 100vh;
-    padding: 28px 20px;
+    max-height: 100dvh;
+    padding: 32px 20px 28px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .modal-close {
+    width: 44px;
+    height: 44px;
+    top: 12px;
+    right: 12px;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .rules li {
+    padding-left: 16px;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .scoring {
+    gap: 6px;
   }
 
   .music-toggle {
