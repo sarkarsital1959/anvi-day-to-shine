@@ -1,6 +1,6 @@
 (function () {
     var photos = [
-        'images/IMG_1229.jpg', 'images/IMG_1283.jpg', 'images/IMG_1611.jpg',
+        'images/IMG_1283.jpg', 'images/IMG_1611.jpg',
         'images/IMG_1719.jpg', 'images/IMG_1775.jpg', 'images/IMG_1866.jpg',
         'images/IMG_1927.jpg', 'images/IMG_2090.jpg', 'images/IMG_2103.jpg',
         'images/IMG_2157.jpg', 'images/IMG_2217.jpg'
@@ -11,71 +11,55 @@
     if (!overlay) return;
     overlay.style.display = 'flex';
 
-    // Shuffle
-    for (var i = photos.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tmp = photos[i]; photos[i] = photos[j]; photos[j] = tmp;
-    }
+    // Create grid container
+    var grid = document.createElement('div');
+    grid.className = 'slideshow-grid';
+    // Insert grid before the message
+    overlay.insertBefore(grid, message);
 
-    var isMobile = window.innerWidth < 768;
-    var tileW = isMobile ? 140 : 200;
-    var tileH = isMobile ? 180 : 250;
     var tiles = [];
-    var vw = window.innerWidth;
-    var vh = window.innerHeight;
 
-    // Preload all images first, then start animation
+    // Preload all images, then animate
     var loaded = 0;
-    var imgElements = [];
-
-    photos.forEach(function (src, i) {
+    photos.forEach(function (src) {
         var img = new Image();
         img.onload = img.onerror = function () {
             loaded++;
             if (loaded === photos.length) startAnimation();
         };
         img.src = src;
-        imgElements.push(img);
     });
 
     function startAnimation() {
         photos.forEach(function (src, i) {
             var tile = document.createElement('div');
             tile.className = 'glass-tile';
-            var rot = (Math.random() * 14 - 7);
+            var rot = (Math.random() * 6 - 3);
             tile.style.setProperty('--rot', rot + 'deg');
-            tile.style.width = tileW + 'px';
-            tile.style.height = tileH + 'px';
-
-            // Spread across screen avoiding dead center
-            var x = Math.random() * (vw - tileW - 40) + 20;
-            var y = Math.random() * (vh - tileH - 40) + 20;
-            tile.style.left = x + 'px';
-            tile.style.top = y + 'px';
 
             var img = document.createElement('img');
             img.src = src;
             img.alt = '';
             tile.appendChild(img);
-            overlay.appendChild(tile);
+            grid.appendChild(tile);
             tiles.push(tile);
         });
 
-        // Pop in one by one
-        var popDelay = 200;
+        // Stagger pop-in
+        var popDelay = 180;
         tiles.forEach(function (tile, i) {
             setTimeout(function () {
                 tile.classList.add('pop-in');
             }, i * popDelay);
         });
 
-        // Show message after tiles
-        var allInTime = tiles.length * popDelay + 400;
+        // Show message after all tiles
+        var allInTime = tiles.length * popDelay + 300;
         setTimeout(function () {
             if (message) message.classList.add('visible');
         }, allInTime);
 
-        // Auto-end after holding
+        // Auto-end
         autoTimer = setTimeout(endSlideshow, allInTime + 2000);
     }
 

@@ -5,7 +5,7 @@
             -webkit-tap-highlight-color: transparent;
         }
         body {
-            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
             background: linear-gradient(135deg, #ede9fe 0%, #fce7f3 35%, #d1fae5 65%, #e0f2fe 100%);
             background-size: 300% 300%;
             animation: pastelGradient 20s ease infinite;
