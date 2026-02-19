@@ -3,7 +3,7 @@
         'images/IMG_1283.jpg', 'images/IMG_1611.jpg',
         'images/IMG_1719.jpg', 'images/IMG_1775.jpg', 'images/IMG_1866.jpg',
         'images/IMG_1927.jpg', 'images/IMG_2090.jpg', 'images/IMG_2103.jpg',
-        'images/IMG_2157.jpg', 'images/IMG_2217.jpg'
+        'images/IMG_2157.jpg'
     ];
 
     var overlay = document.getElementById('slideshowOverlay');
