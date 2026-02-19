@@ -79,19 +79,21 @@
             <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
             <p class="login-subtitle">Happy Birthday, Anvi!</p>
 
-            <!-- Photo Collage -->
-            <div class="photo-collage">
-                <div class="photo-card feature"><img src="images/IMG_2103.jpg" alt=""></div>
-                <div class="photo-card"><img src="images/IMG_1611.jpg" alt=""></div>
-                <div class="photo-card"><img src="images/IMG_1283.jpg" alt=""></div>
-                <div class="photo-card"><img src="images/IMG_1866.jpg" alt=""></div>
-                <div class="photo-card feature"><img src="images/IMG_1927.jpg" alt=""></div>
-                <div class="photo-card"><img src="images/IMG_2090.jpg" alt=""></div>
-                <div class="photo-card"><img src="images/IMG_1775.jpg" alt=""></div>
-                <div class="photo-card feature"><img src="images/IMG_2217.jpg" alt=""></div>
-                <div class="photo-card"><img src="images/IMG_2157.jpg" alt=""></div>
-                <div class="photo-card"><img src="images/IMG_1719.jpg" alt=""></div>
+            <!-- Photo Collage — tap to expand -->
+            <div class="photo-collage" id="photoCollage">
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2103.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1611.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1283.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1866.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1927.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2090.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1775.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2217.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_2157.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1719.jpg" alt=""></div>
+                <div class="photo-card" onclick="expandPhoto(this)"><img src="images/IMG_1229.jpg" alt=""></div>
             </div>
+            <div class="photo-backdrop" id="photoBackdrop" onclick="collapsePhoto()"></div>
 
             <div class="login-form">
                 <div class="form-group">
@@ -462,6 +464,23 @@
         🔊
     </button>
 
+    <!-- Photo expand/collapse -->
+    <script>
+    var expandedCard = null;
+    function expandPhoto(card) {
+        if (expandedCard) { collapsePhoto(); return; }
+        expandedCard = card;
+        card.classList.add('expanded');
+        document.getElementById('photoBackdrop').classList.add('visible');
+    }
+    function collapsePhoto() {
+        if (expandedCard) {
+            expandedCard.classList.remove('expanded');
+            expandedCard = null;
+        }
+        document.getElementById('photoBackdrop').classList.remove('visible');
+    }
+    </script>
     <!-- Slideshow Script -->
     <script src="js/slideshow.js"></script>
     <!-- Application Script -->
