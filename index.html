@@ -96,7 +96,7 @@
 
     <!-- Background Music -->
     <audio id="backgroundMusic" loop>
-        <source src="music/say-na-say-na.mp3" type="audio/mpeg">
+        <source src="music/cheri-cheri-lady.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Music Control Button -->
@@ -124,7 +124,9 @@
         var audio = document.getElementById('backgroundMusic');
         var btn = document.getElementById('musicToggle');
         if (audio.paused) {
+            audio.volume = 0;
             audio.play();
+            fadeIn(audio, 2000);
             btn.textContent = '\u{1F50A}';
             btn.classList.remove('muted');
         } else {
@@ -132,6 +134,19 @@
             btn.textContent = '\u{1F507}';
             btn.classList.add('muted');
         }
+    }
+
+    function fadeIn(audio, duration) {
+        var step = 0.05;
+        var interval = duration * step;
+        var fadeTimer = setInterval(function() {
+            if (audio.volume < 1 - step) {
+                audio.volume = Math.min(audio.volume + step, 1);
+            } else {
+                audio.volume = 1;
+                clearInterval(fadeTimer);
+            }
+        }, interval);
     }
 
     var gameData = {
