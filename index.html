@@ -13,8 +13,17 @@
     
     <!-- External Styles -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/slideshow.css">
 </head>
 <body>
+    <!-- Birthday Slideshow Overlay -->
+    <div class="slideshow-overlay" id="slideshowOverlay" style="display:none;">
+        <button class="slideshow-skip">Skip</button>
+        <div class="slideshow-message">
+            <h1>Let's celebrate her!</h1>
+            <p>Happy Birthday, Anvi</p>
+        </div>
+    </div>
     <!-- Submission Modal -->
     <div class="submission-modal" id="submissionModal">
         <div class="submission-content">
@@ -34,18 +43,18 @@
         <div class="login-screen hidden" id="confirmScreen">
             <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
             <p class="login-subtitle">Happy Birthday, Anvi!</p>
-            <h2 style="text-align: center; color: #667eea; margin: 20px 0;">Welcome Back!</h2>
+            <h2 style="text-align: center; color: #a78bfa; margin: 20px 0;">Welcome Back!</h2>
             <div class="login-form">
                 <div class="form-group">
                     <label>Are you sure you are:</label>
-                    <p id="confirmPlayerName" style="font-size: 24px; font-weight: bold; color: #667eea; padding: 15px; background: #f0f0f0; border-radius: 8px; text-align: center; margin: 15px 0;"></p>
+                    <p id="confirmPlayerName" style="font-size: 24px; font-weight: bold; color: #a78bfa; padding: 15px; background: #f0f0f0; border-radius: 8px; text-align: center; margin: 15px 0;"></p>
                 </div>
                 <div class="form-group">
                     <label>Your Team:</label>
-                    <p id="confirmTeamName" style="font-size: 20px; font-weight: bold; color: #51cf66; padding: 12px; background: #f0f0f0; border-radius: 8px; text-align: center;"></p>
+                    <p id="confirmTeamName" style="font-size: 20px; font-weight: bold; color: #6ee7b7; padding: 12px; background: #f0f0f0; border-radius: 8px; text-align: center;"></p>
                 </div>
-                <button type="button" class="login-btn" onclick="confirmIdentity()" style="background: #51cf66;">✓ Yes, Continue</button>
-                <button type="button" class="login-btn" onclick="startFresh()" style="background: #ff6b6b; margin-top: 15px;">✗ No, Start Fresh</button>
+                <button type="button" class="login-btn" onclick="confirmIdentity()" style="background: #6ee7b7;">✓ Yes, Continue</button>
+                <button type="button" class="login-btn" onclick="startFresh()" style="background: #fca5a5; margin-top: 15px;">✗ No, Start Fresh</button>
             </div>
         </div>
 
@@ -62,7 +71,7 @@
                                placeholder="Type to search or click to see all..."
                                autocomplete="off"
                                required
-                               style="width: 100%; padding: 12px; border: 2px solid #667eea; border-radius: 10px; background: white; color: #333; font-size: 16px; font-weight: 500;">
+                               style="width: 100%; padding: 12px; border: 2px solid #a78bfa; border-radius: 10px; background: white; color: #333; font-size: 16px; font-weight: 500;">
                         <div id="nameDropdown" 
                              style="display: none; position: absolute; top: 100%; left: 0; right: 0; max-height: 300px; overflow-y: auto; background: rgba(50, 50, 70, 0.95); border: 2px solid rgba(255,255,255,0.3); border-radius: 10px; margin-top: 5px; backdrop-filter: blur(10px); z-index: 1000;">
                 </div>
@@ -88,11 +97,11 @@
             <div class="login-form">
                 <div class="form-group">
                     <label for="displayNameLabel2">Player Name</label>
-                    <p id="displayNameLabel2" style="font-size: 20px; font-weight: bold; color: #667eea; padding: 10px; background: #f0f0f0; border-radius: 8px; text-align: center;"></p>
+                    <p id="displayNameLabel2" style="font-size: 20px; font-weight: bold; color: #a78bfa; padding: 10px; background: #f0f0f0; border-radius: 8px; text-align: center;"></p>
                 </div>
                 <div class="form-group">
                     <label for="displayTeamLabel2">Your Team</label>
-                    <p id="displayTeamLabel2" style="font-size: 18px; font-weight: bold; color: #51cf66; padding: 10px; background: #f0f0f0; border-radius: 8px; text-align: center;"></p>
+                    <p id="displayTeamLabel2" style="font-size: 18px; font-weight: bold; color: #6ee7b7; padding: 10px; background: #f0f0f0; border-radius: 8px; text-align: center;"></p>
                 </div>
                 <div class="form-group">
                     <label style="display: flex; align-items: center; gap: 8px;">
@@ -109,7 +118,7 @@
                     </div>
                 </div>
                 <button type="button" class="login-btn" onclick="proceedToChallenges()">Continue</button>
-                <button type="button" class="login-btn" onclick="leaveTeamFromAssignment()" style="background: #ff6b6b; width: 100%; margin-top: 15px;">Leave Team</button>
+                <button type="button" class="login-btn" onclick="leaveTeamFromAssignment()" style="background: #fca5a5; width: 100%; margin-top: 15px;">Leave Team</button>
             </div>
         </div>
 
@@ -119,7 +128,7 @@
             <p class="login-subtitle">Happy Birthday, Anvi!</p>
             <!-- Partiful Event Link -->
             <div style="text-align: center; margin: 15px 0;">
-                <a href="https://partiful.com/e/cIr9wLWguc4iEw3yBb8I" target="_blank" style="display: inline-block; padding: 10px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 15px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <a href="https://partiful.com/e/cIr9wLWguc4iEw3yBb8I" target="_blank" style="display: inline-block; padding: 10px 24px; background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 15px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                     🎉 View Event on Partiful
                 </a>
             </div>
@@ -141,11 +150,11 @@
         <div class="login-screen hidden" id="passwordScreen">
             <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
             <p class="login-subtitle">Happy Birthday, Anvi!</p>
-            <h2 style="text-align: center; color: #667eea; margin: 20px 0;">Game 2</h2>
+            <h2 style="text-align: center; color: #a78bfa; margin: 20px 0;">Game 2</h2>
             
             <!-- House Layout Preview -->
             <div style="max-width: 600px; margin: 20px auto; padding: 0 15px;">
-                <h3 style="text-align: center; color: #667eea; margin-bottom: 15px;">🏠 House Layout Preview</h3>
+                <h3 style="text-align: center; color: #a78bfa; margin-bottom: 15px;">🏠 House Layout Preview</h3>
                 <div class="floorplan-container" style="pointer-events: none; opacity: 0.9;">
                     <div class="floorplan">
                         <div class="room backroom" data-room="backroom">
@@ -184,7 +193,7 @@
             
             <!-- Practice Room Example -->
             <div style="max-width: 500px; margin: 30px auto; padding: 20px; background: rgba(255, 255, 255, 0.95); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <h3 style="text-align: center; color: #667eea; margin-bottom: 10px;">🎯 Try It Out!</h3>
+                <h3 style="text-align: center; color: #a78bfa; margin-bottom: 10px;">🎯 Try It Out!</h3>
                 <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">
                     Click a circle to start counting, then use +/− buttons to adjust
                 </p>
@@ -242,10 +251,10 @@
         <div class="login-screen hidden" id="challenge1PasswordScreen">
             <h1 class="login-title">✨ It's Anvi's Day to Shine ✨</h1>
             <p class="login-subtitle">Happy Birthday, Anvi!</p>
-            <h2 style="text-align: center; color: #667eea; margin: 20px 0;">Game 1 - Memory Game</h2>
+            <h2 style="text-align: center; color: #a78bfa; margin: 20px 0;">Game 1 - Memory Game</h2>
 
             <div style="max-width: 500px; margin: 20px auto; padding: 20px; background: rgba(255, 255, 255, 0.95); border-radius: 15px;">
-                <h3 style="text-align: center; color: #667eea; margin-bottom: 15px;">📝 How It Works</h3>
+                <h3 style="text-align: center; color: #a78bfa; margin-bottom: 15px;">📝 How It Works</h3>
                 <p style="color: #666; line-height: 1.6; margin-bottom: 10px;">
                     Add up to 25 memory items (just type and press Enter)
                 </p>
@@ -268,26 +277,26 @@
             <p style="text-align: center; color: #999; font-size: 16px; margin-bottom: 10px;">Happy Birthday, Anvi!</p>
             <div class="team-name" id="game1TeamName"></div>
             <div class="player-info" id="game1PlayerName"></div>
-            <h2 style="text-align: center; color: #667eea; margin: 10px 0;">Game 1: Memory Items</h2>
+            <h2 style="text-align: center; color: #a78bfa; margin: 10px 0;">Game 1: Memory Items</h2>
             
             <!-- Point System Info -->
-            <div style="max-width: 600px; margin: 15px auto; padding: 15px; background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border: 2px solid #667eea; border-radius: 12px; text-align: center;">
-                <p style="margin: 0; font-size: 14px; color: #667eea; font-weight: 600;">
+            <div style="max-width: 600px; margin: 15px auto; padding: 15px; background: linear-gradient(135deg, #a78bfa15 0%, #c4b5fd15 100%); border: 2px solid #a78bfa; border-radius: 12px; text-align: center;">
+                <p style="margin: 0; font-size: 14px; color: #a78bfa; font-weight: 600;">
                     🏆 Point System: 1st Place = 50 points | Last Place = 0 points
                 </p>
             </div>
             
-            <div class="timer" id="game1Timer" style="font-size: 48px; font-weight: bold; text-align: center; color: #667eea; margin: 20px 0;">1:00</div>
+            <div class="timer" id="game1Timer" style="font-size: 48px; font-weight: bold; text-align: center; color: #a78bfa; margin: 20px 0;">1:00</div>
             
             <div style="max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 style="color: #667eea;">Items Added: <span id="game1Count">0</span> / 25</h3>
+                    <h3 style="color: #a78bfa;">Items Added: <span id="game1Count">0</span> / 25</h3>
                     <button onclick="backToGame1Selection()" style="padding: 10px 20px; background: #999; color: white; border: none; border-radius: 8px; cursor: pointer;">← Back</button>
                 </div>
                 
                 <div style="margin-bottom: 20px;">
-                    <input type="text" id="game1Input" placeholder="Type an item and press Enter..." style="width: 100%; padding: 15px; border: 2px solid #667eea; border-radius: 10px; font-size: 16px;" onkeypress="if(event.key==='Enter') addGame1Item()">
-                    <button onclick="addGame1Item()" style="width: 100%; margin-top: 10px; padding: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer;">
+                    <input type="text" id="game1Input" placeholder="Type an item and press Enter..." style="width: 100%; padding: 15px; border: 2px solid #a78bfa; border-radius: 10px; font-size: 16px;" onkeypress="if(event.key==='Enter') addGame1Item()">
+                    <button onclick="addGame1Item()" style="width: 100%; margin-top: 10px; padding: 12px; background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer;">
                         ➕ Add Item
                     </button>
                 </div>
@@ -309,11 +318,11 @@
             <div class="team-name" id="displayTeamName"></div>
             <div class="player-info" id="displayPlayerName"></div>
             <div class="active-players" id="activePlayers">👥 Active Players: 1</div>
-            <h2 style="text-align: center; color: #667eea; margin: 10px 0;">Game 2: The Ultimate Spot Finder</h2>
+            <h2 style="text-align: center; color: #a78bfa; margin: 10px 0;">Game 2: The Ultimate Spot Finder</h2>
             
             <!-- Point System Info -->
-            <div style="max-width: 600px; margin: 15px auto; padding: 15px; background: linear-gradient(135deg, #4ade8015 0%, #3b82f615 100%); border: 2px solid #3b82f6; border-radius: 12px; text-align: center;">
-                <p style="margin: 0; font-size: 14px; color: #1e40af; font-weight: 600;">
+            <div style="max-width: 600px; margin: 15px auto; padding: 15px; background: linear-gradient(135deg, #a78bfa15 0%, #c4b5fd15 100%); border: 2px solid #a78bfa; border-radius: 12px; text-align: center;">
+                <p style="margin: 0; font-size: 14px; color: #7c3aed; font-weight: 600;">
                     🎯 Point System: Correct Find = +5 pts | False Find = -5 pts | 81 Total Locations
                 </p>
             </div>
@@ -422,6 +431,8 @@
         🔊
     </button>
 
+    <!-- Slideshow Script -->
+    <script src="js/slideshow.js"></script>
     <!-- Application Script -->
     <script src="js/app.js"></script>
 </body>
