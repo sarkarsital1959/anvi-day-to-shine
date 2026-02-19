@@ -6,7 +6,9 @@
         }
         body {
             font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ede9fe 0%, #fce7f3 50%, #e0f2fe 100%);
+            background: linear-gradient(135deg, #ede9fe 0%, #fce7f3 35%, #d1fae5 65%, #e0f2fe 100%);
+            background-size: 300% 300%;
+            animation: pastelGradient 20s ease infinite;
             position: relative;
             min-height: 100vh;
             padding: 10px;
@@ -14,45 +16,8 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Photo mosaic background */
-        .photo-mosaic {
-            position: fixed;
-            top: -20px;
-            left: -20px;
-            width: calc(100% + 40px);
-            height: calc(100% + 40px);
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-auto-rows: 1fr;
-            gap: 0;
-            z-index: 0;
-            filter: blur(20px) saturate(0.8);
-        }
-        .photo-mosaic img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        @media (max-width: 768px) {
-            .photo-mosaic {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        /* Pastel overlay on top of mosaic */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(167, 139, 250, 0.7) 0%, rgba(249, 168, 212, 0.65) 25%, rgba(110, 231, 183, 0.6) 50%, rgba(253, 186, 116, 0.65) 75%, rgba(196, 181, 253, 0.7) 100%);
-            background-size: 200% 200%;
-            animation: pastelGradient 15s ease infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
+        /* Hide the mosaic div — photos only in slideshow */
+        .photo-mosaic { display: none; }
 
         @keyframes pastelGradient {
             0% { background-position: 0% 50%; }
