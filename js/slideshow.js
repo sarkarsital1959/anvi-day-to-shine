@@ -6,10 +6,10 @@
         'images/IMG_2157.jpg', 'images/IMG_2217.jpg'
     ];
 
-    var ENTER_MS = 500;
-    var HOLD_MS = 1200;
-    var EXIT_MS = 400;
-    var MESSAGE_HOLD_MS = 2000;
+    var ENTER_MS = 400;
+    var HOLD_MS = 800;
+    var EXIT_MS = 300;
+    var MESSAGE_HOLD_MS = 1500;
 
     var enterStyles = ['scale', 'slide-left', 'slide-right', 'zoom', 'rotate'];
     var exitStyles = ['scale', 'slide-left', 'slide-right', 'zoom', 'rotate'];
