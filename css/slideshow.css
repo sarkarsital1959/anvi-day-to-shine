@@ -172,6 +172,9 @@
     .slideshow-message {
         padding: 14px 20px;
     }
+    .glass-tile:nth-child(n+7) {
+        display: none;
+    }
     .slideshow-message h1 {
         font-size: 18px;
         line-height: 1.2;
