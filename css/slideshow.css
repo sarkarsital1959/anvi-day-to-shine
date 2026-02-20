@@ -152,12 +152,18 @@
 }
 
 @media (max-width: 480px) {
+    .slideshow-overlay {
+        gap: 16px;
+    }
     .slideshow-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-        max-width: 92vw;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 80vw;
+    }
+    .slideshow-message {
+        padding: 18px 24px;
     }
     .slideshow-message h1 {
-        font-size: 22px;
+        font-size: 20px;
     }
 }
